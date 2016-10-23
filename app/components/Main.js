@@ -19,11 +19,7 @@ var Main = React.createClass({
                 </div>
                 
                 <div className="row">
-                    <div className="col-sm-3">
-                        <PlayersContainer />
-                    </div>
-    
-                    <div className="col-sm-9">
+                    <div className="col-sm-9 col-sm-push-3">
                         <ReactCSSTransitionGroup
                             transitionName="appear"
                             transitionEnterTimeout={500}
@@ -32,6 +28,9 @@ var Main = React.createClass({
                             {React.cloneElement(this.props.children, { key: this.props.location.pathname })}
                         
                         </ReactCSSTransitionGroup>
+                    </div>
+                    <div className="col-sm-3 col-sm-pull-9">
+                        <PlayersContainer />
                     </div>
                 </div>
             </div>

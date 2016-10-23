@@ -51,7 +51,7 @@ export default class BattleContainer extends React.Component {
   render () {
     console.log('Rendering', this.state.list);
     return (
-      <div>
+      <div id="battleContainer">
         {this.state.list.map(function(row){
           return <BattleRow blocks={ row.blocks } key={ row.key }/>;
         }.bind(this))}

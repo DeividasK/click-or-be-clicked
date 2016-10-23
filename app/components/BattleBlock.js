@@ -24,14 +24,15 @@ export default class BattleBlock extends React.Component {
     
     this.setState(this.state);
     
-    console.log(this.state);
+    var sound = new Audio("blop.mp3");
+    sound.play();
     firebaseHelpers.updateGame(this.state);
   }
   
   render () {
     return (
       <div className="col-xs-2">
-        <div className={ this.state.color } onClick={ this.handleClick.bind(this) }>{ this.state.blockId }</div>
+        <div className={ 'box ' + this.state.color } onClick={ this.handleClick.bind(this) }>{ this.state.blockId }</div>
       </div>
     )
   }

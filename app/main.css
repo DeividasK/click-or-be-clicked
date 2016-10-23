@@ -22,10 +22,16 @@
 }
 
 .box {
+  min-height: 50px;
+}
+
+#battleContainer {
+  margin: 15px 0;
+}
+
+.col-xs-2 {
+  padding: 0;
   border: 1px solid black;
-  display: inline-block;
-  height: 98px;
-  width: 98px;
 }
 
 .noselect {
