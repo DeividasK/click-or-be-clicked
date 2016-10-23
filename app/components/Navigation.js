@@ -1,12 +1,12 @@
-var firebase = require('firebase/app');
-
 import React from 'react';
 import firebaseHelpers from '../utils/firebaseHelpers.js';
+import Auth from './Auth';
 
+var firebase = require('firebase/app');
 var ReactRouter = require('react-router');
 var Link = ReactRouter.Link;
 
-class Navigation extends React.Component {
+export default class Navigation extends React.Component {
   constructor() {
     super();
 
@@ -18,6 +18,8 @@ class Navigation extends React.Component {
       } else {
         this.setState({ auth: false });
       }
+      
+      console.log(this.state);
     }.bind(this));
   }
 
@@ -48,8 +50,7 @@ class Navigation extends React.Component {
       
           <div className="collapse navbar-collapse">
             <form className="navbar-form navbar-right">
-              <button className="btn btn-default" onClick={ this.handleSignIn }>Sign In</button>
-              <button className="btn btn-default" onClick={ this.handleSignOut }>Sign Out</button>
+              <Auth isAuthenticated={ this.state.auth } onSignIn={ this.handleSignIn } onSignOut={ this.handleSignOut } />
             </form>
           </div>
         </div>
@@ -57,5 +58,3 @@ class Navigation extends React.Component {
     )
   }
 }
-
-export default Navigation;
