@@ -7,6 +7,8 @@ var firebase = require('firebase/app')
 var ReactRouter = require('react-router')
 var Link = ReactRouter.Link
 
+import { signIn, signOut } from '../actions/userActions'
+
 @connect((store) => {
     return {
         user: store.user
@@ -15,11 +17,11 @@ var Link = ReactRouter.Link
 
 export default class Navigation extends React.Component {
   handleSignIn () {
-    firebaseHelpers.signIn();
+    return signIn();
   }
   
   handleSignOut () {
-    firebaseHelpers.signOut();
+    return signOut(this.props.user.data.id);
   }
   
   render () {
@@ -28,7 +30,7 @@ export default class Navigation extends React.Component {
   
           <div className="navbar-header">
             
-            <Auth isAuthenticated={ this.props.user.auth } onSignIn={ this.handleSignIn } onSignOut={ this.handleSignOut } />
+            <Auth isAuthenticated={ this.props.user.auth } onSignIn={ this.handleSignIn } onSignOut={ this.handleSignOut.bind(this) } />
             
             <Link to='/' className="navbar-brand">
               Click or be clicked

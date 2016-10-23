@@ -18,47 +18,6 @@ export default new class firebaseHelpers {
     firebase.initializeApp(config);
     
     this.database = firebase.database();
-    this.provider = new firebase.auth.GoogleAuthProvider();
-
-    this.userId = null;
-  }
-  
-  signIn () {
-    console.log('Running sign in.');
-    return firebase.auth().signInWithRedirect(this.provider);
-  }
-  
-  checkAuth() {
-    console.log('Checking authentication.');
-    return firebase.auth().getRedirectResult().then(function(result) {
-      // This gives you a Google Access Token. You can use it to access the Google API.
-      var token = result.credential.accessToken;
-      
-      // The signed-in user info.
-      var user = result.user;
-      
-      this.userId = user.uid;
-      
-      this.database.ref('users-active/' + user.uid).set({
-          name: user.displayName,
-          email: user.email,
-          image: user.photoURL
-      });
-      
-      console.log('Authenticated successfully.');
-    }.bind(this)).catch(function(error) {
-      console.log('Authentication unsuccessful', error);
-    });
-  }
-  
-  signOut () {
-    this.database.ref('users-active/' + this.userId).remove();
-    
-    return firebase.auth().signOut().then(function() {
-      console.log('Sign out successful.');
-    }, function(error) {
-      // An error happened.
-    });
   }
   
   getOnlinePlayers () {

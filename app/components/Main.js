@@ -7,7 +7,7 @@ import Navigation from './Navigation'
 import PlayersContainer from '../containers/PlayersContainer'
 import styles from '../styles'
 require('../main.css')
-import { authenticateUser } from '../actions/userActions'
+import { authenticate } from '../actions/userActions'
 
 @connect((store) => {
     return {
@@ -18,7 +18,7 @@ import { authenticateUser } from '../actions/userActions'
 export default class Main extends React.Component {
     
     componentWillMount () {
-        authenticateUser();
+        authenticate();
     }
     
     render () {
