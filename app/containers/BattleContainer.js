@@ -28,6 +28,8 @@ export default class BattleContainer extends React.Component {
       }
     }
     
+    console.log(this.state);
+    
     this.setState(this.state);
   }
   
@@ -37,6 +39,7 @@ export default class BattleContainer extends React.Component {
       this.state.board = snapshot.val();
       
       // this.setState(this.state);
+      console.log('State changed');
       
       this.createBoard();
     }.bind(this));
@@ -46,10 +49,11 @@ export default class BattleContainer extends React.Component {
   }
   
   render () {
+    console.log('Rendering', this.state.list);
     return (
       <div>
         {this.state.list.map(function(row){
-          return <BattleRow board={ this.state.board } blocks={ row.blocks } key={ row.key }/>;
+          return <BattleRow blocks={ row.blocks } key={ row.key }/>;
         }.bind(this))}
       </div>
     )
