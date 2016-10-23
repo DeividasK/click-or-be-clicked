@@ -1,9 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import routes from './config/routes';
-import firebase from './utils/firebaseHelpers';
+import firebaseHelpers from './utils/firebaseHelpers';
 
-firebase.checkAuth();
+firebaseHelpers.checkAuth();
 
 ReactDOM.render(
     routes,

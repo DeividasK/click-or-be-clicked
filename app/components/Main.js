@@ -11,7 +11,7 @@ require('../main.css');
 var Main = React.createClass({
     render: function() {
         return (
-            <div className="container" style={ styles.space }>
+            <div className="container-fluid" style={ styles.space }>
                 <div className="row">
                     <div className="col-sm-12">
                         <Navigation />

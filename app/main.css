@@ -14,15 +14,15 @@
 }
 
 .red {
-  color: red;
+  background-color: red;
 }
 
 .blue {
-  color: blue;
+  background-color: blue;
 }
 
 .box {
-  border: 1px solid;
+  border: 1px solid black;
   display: inline-block;
   height: 98px;
   width: 98px;
@@ -36,4 +36,12 @@
   -ms-user-select: none;       /* Internet Explorer/Edge */
   user-select: none;           /* Non-prefixed version, currently
                                   not supported by any browser */
+}
+
+.navbar-header {
+  float: none !important;
+}
+
+.navbar-toggle {
+  display: inline-block !important;
 }
