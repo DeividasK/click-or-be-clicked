@@ -26,7 +26,7 @@ export default class BattleBlock extends React.Component {
     
     var sound = new Audio("blop.mp3");
     sound.play();
-    firebaseHelpers.updateGame(this.state);
+    firebaseHelpers.updateGame(this.state, this.props.params.boardId);
   }
   
   render () {

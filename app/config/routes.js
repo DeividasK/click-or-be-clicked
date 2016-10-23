@@ -6,15 +6,17 @@ var IndexRoute = ReactRouter.IndexRoute;
 var hashHistory = ReactRouter.hashHistory;
 import Main from '../components/Main';
 import Home from '../components/Home';
+import Initiate from '../components/Initiate';
 import BattleContainer from '../containers/BattleContainer';
 
-var routes = (
-    <Router history={hashHistory}>
-        <Route path='/' component={Main}>
-            <IndexRoute component={Home} />
-            <Route path='/battle' component={BattleContainer} />
-        </Route>
-    </Router>
-);
-
-module.exports = routes;
+export default class Routes extends React.Component {
+  render () {
+    return (<Router history={hashHistory}>
+      <Route path='/' component={Main}>
+        <IndexRoute component={Home} />
+        <Route path='initiate' component={Initiate} />
+        <Route path='battle/:boardId' component={BattleContainer} />
+      </Route>
+    </Router>)
+  }
+}

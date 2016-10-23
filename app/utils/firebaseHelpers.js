@@ -74,11 +74,11 @@ export default new class firebaseHelpers {
     });
   }
   
-  updateGame (block, id = '-KUkiiEA0I1_BErO2luP') {
+  updateGame (block, id) {
     return this.database.ref('games/' + id + '/blocks/' + block.blockId).set(block.color);
   }
   
-  getGame (id = '-KUkiiEA0I1_BErO2luP') {
+  getGame (id) {
     return this.database.ref('games/' + id + '/blocks');
   }
 }

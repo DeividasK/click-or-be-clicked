@@ -1,11 +1,11 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import routes from './config/routes';
-import firebaseHelpers from './utils/firebaseHelpers';
+import React from 'react'
+import ReactDOM from 'react-dom'
+import { Provider } from 'react-redux'
+import store from './store'
+import Routes from './config/routes'
 
-firebaseHelpers.checkAuth();
-
-ReactDOM.render(
-    routes,
+ReactDOM.render(<Provider store={store}>
+      <Routes />
+    </Provider>,
     document.getElementById('app')
 );

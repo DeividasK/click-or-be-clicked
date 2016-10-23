@@ -25,6 +25,10 @@
   min-height: 50px;
 }
 
+.padding-top {
+  padding-top: 15px;
+}
+
 #battleContainer {
   margin: 15px 0;
 }

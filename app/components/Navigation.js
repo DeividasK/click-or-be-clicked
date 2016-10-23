@@ -1,28 +1,19 @@
-import React from 'react';
-import firebaseHelpers from '../utils/firebaseHelpers.js';
-import Auth from './Auth';
+import React from 'react'
+import { connect } from 'react-redux'
+import firebaseHelpers from '../utils/firebaseHelpers.js'
+import Auth from './Auth'
 
-var firebase = require('firebase/app');
-var ReactRouter = require('react-router');
-var Link = ReactRouter.Link;
+var firebase = require('firebase/app')
+var ReactRouter = require('react-router')
+var Link = ReactRouter.Link
+
+@connect((store) => {
+    return {
+        user: store.user
+    };
+})
 
 export default class Navigation extends React.Component {
-  constructor() {
-    super();
-
-    this.state = { auth: false };
-    
-    firebase.auth().onAuthStateChanged(function(user) {
-      if (user) {
-        this.setState({ auth: true });
-      } else {
-        this.setState({ auth: false });
-      }
-      
-      console.log(this.state);
-    }.bind(this));
-  }
-
   handleSignIn () {
     firebaseHelpers.signIn();
   }
@@ -37,7 +28,7 @@ export default class Navigation extends React.Component {
   
           <div className="navbar-header">
             
-            <Auth isAuthenticated={ this.state.auth } onSignIn={ this.handleSignIn } onSignOut={ this.handleSignOut } />
+            <Auth isAuthenticated={ this.props.user.auth } onSignIn={ this.handleSignIn } onSignOut={ this.handleSignOut } />
             
             <Link to='/' className="navbar-brand">
               Click or be clicked

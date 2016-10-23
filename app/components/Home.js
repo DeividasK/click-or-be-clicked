@@ -1,20 +1,21 @@
 var React = require('react');
 
-var ReactRouter = require('react-router');
-var Link = ReactRouter.Link;
+import { hashHistory } from 'react-router';
 
-var Home = React.createClass({
-    render: function() {
-        return (
-            <div>
-                <h1>Click or BE clicked</h1>
-                <p className='lead'>Speed is your friend.</p>
-                <Link to='/battle'>
-                  Start the battle
-                </Link>
-            </div>
-        )
-    }
-});
-
-module.exports = Home;
+export default class Home extends React.Component {
+  
+  initiateBattle () {
+    const path = `/initiate`
+    hashHistory.push(path);
+  }
+  
+  render () {
+    return (
+      <div>
+        <h1>Click or BE clicked</h1>
+        <p className='lead'>Speed is your friend.</p>
+        <button className='btn btn-default' onClick={ this.initiateBattle }>Initiate the battle!</button>
+      </div>
+    )
+  }
+};

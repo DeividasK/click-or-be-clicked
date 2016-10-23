@@ -1,9 +1,9 @@
 import React from 'react';
-import BattleRow from '../components/BattleRow';
 import firebase from '../utils/firebaseHelpers';
+import Battle from '../components/Battle';
 
 export default class BattleContainer extends React.Component {
-  constructor () {
+  constructor (props) {
     super();
     this.state = {
       boardSize: 6,
@@ -38,7 +38,7 @@ export default class BattleContainer extends React.Component {
   }
   
   componentWillMount () {
-    firebase.getGame().on('value', function(snapshot){
+    firebase.getGame(this.props.params.boardId).on('value', function(snapshot){
       this.state.board = snapshot.val();
       
       // this.setState(this.state);
@@ -50,7 +50,6 @@ export default class BattleContainer extends React.Component {
   }
   
   render () {
-    console.log('Rendering', this.state.list);
     return (
       <div id="battleContainer">
         <div className="row">
@@ -61,13 +60,7 @@ export default class BattleContainer extends React.Component {
             Red<br />{ this.state.red }
           </div>
         </div>
-        <div className="row">
-          <div className="col-xs-12">
-            {this.state.list.map(function(row){
-              return <BattleRow blocks={ row.blocks } key={ row.key }/>;
-            }.bind(this))}
-          </div>
-        </div>
+        <Battle list={ this.state.list }/>
       </div>
     )
   }

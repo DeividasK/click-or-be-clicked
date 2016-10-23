@@ -1,17 +1,30 @@
-import React from 'react';
-import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
+import React from 'react'
+import { connect } from 'react-redux'
 
-import Navigation from './Navigation';
-import PlayersContainer from '../containers/PlayersContainer';
-import styles from '../styles';
+import ReactCSSTransitionGroup from 'react-addons-css-transition-group'
+import firebaseHelpers from '../utils/firebaseHelpers'
+import Navigation from './Navigation'
+import PlayersContainer from '../containers/PlayersContainer'
+import styles from '../styles'
+require('../main.css')
+import { authenticateUser } from '../actions/userActions'
 
-require('../main.css');
+@connect((store) => {
+    return {
+        user: store.user
+    };
+})
 
-
-var Main = React.createClass({
-    render: function() {
+export default class Main extends React.Component {
+    
+    componentWillMount () {
+        authenticateUser();
+    }
+    
+    render () {
+        console.log(this.props.user);
         return (
-            <div className="container-fluid" style={ styles.space }>
+            <div className="container-fluid padding-top">
                 <div className="row">
                     <div className="col-sm-12">
                         <Navigation />
@@ -36,6 +49,4 @@ var Main = React.createClass({
             </div>
         )
     }
-});
-
-module.exports = Main;
+}
