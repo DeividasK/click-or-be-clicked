@@ -12,12 +12,19 @@ export default class BattleBlock extends React.Component {
     };
   }
   
+  componentWillReceiveProps(props) {
+    this.state = {
+      color: props.color,
+      blockId: props.blockId
+    };
+  }
+  
   handleClick (e) {
     this.state.color = (this.state.color === 'red') ? 'blue' : 'red';
     
     this.setState(this.state);
     
-    // console.log(this.state);
+    console.log(this.state);
     firebaseHelpers.updateGame(this.state);
   }
   
