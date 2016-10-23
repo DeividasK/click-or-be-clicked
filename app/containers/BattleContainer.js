@@ -8,7 +8,9 @@ export default class BattleContainer extends React.Component {
     this.state = {
       boardSize: 6,
       list: [],
-      board: {}
+      board: {},
+      red: 0,
+      blue: 0
     };
   }
   generateColor(i, j) {
@@ -16,6 +18,8 @@ export default class BattleContainer extends React.Component {
   }
   createBoard () {
     this.state.list.length = 0;
+    this.state.red = 0;
+    this.state.blue = 0;
     
     for (let i = 0; i < this.state.boardSize; i += 1) {
       this.state.list.push({ key: i, blocks: [] });
@@ -23,18 +27,17 @@ export default class BattleContainer extends React.Component {
         let key = i * 6 + j + 1;
         
         let color = (this.state.board[key] !== undefined) ? this.state.board[key] : this.generateColor(i, j);
+        
+        this.state[color] += 1;
 
         this.state.list[i].blocks.push({ 'key': key, 'color': color });
       }
     }
     
-    console.log(this.state);
-    
     this.setState(this.state);
   }
   
   componentWillMount () {
-    
     firebase.getGame().on('value', function(snapshot){
       this.state.board = snapshot.val();
       
@@ -43,8 +46,6 @@ export default class BattleContainer extends React.Component {
       
       this.createBoard();
     }.bind(this));
-    
-    
     // firebase.addNewGame(this.state.board);
   }
   
@@ -52,9 +53,21 @@ export default class BattleContainer extends React.Component {
     console.log('Rendering', this.state.list);
     return (
       <div id="battleContainer">
-        {this.state.list.map(function(row){
-          return <BattleRow blocks={ row.blocks } key={ row.key }/>;
-        }.bind(this))}
+        <div className="row">
+          <div className="col-xs-6">
+            Blue<br />{ this.state.blue }
+          </div>
+          <div className="col-xs-6">
+            Red<br />{ this.state.red }
+          </div>
+        </div>
+        <div className="row">
+          <div className="col-xs-12">
+            {this.state.list.map(function(row){
+              return <BattleRow blocks={ row.blocks } key={ row.key }/>;
+            }.bind(this))}
+          </div>
+        </div>
       </div>
     )
   }
