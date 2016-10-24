@@ -38,6 +38,24 @@
   border: 1px solid black;
 }
 
+.player-img {
+  display: inline-block;
+  height: 50px;
+}
+
+.player-name {
+  padding-left: 15px;
+}
+
+.panel-body > .list-group {
+  margin: 0;
+}
+
+.list-group-item {
+  padding: 0;
+  cursor: pointer;
+}
+
 .noselect {
   -webkit-touch-callout: none; /* iOS Safari */
   -webkit-user-select: none;   /* Chrome/Safari/Opera */

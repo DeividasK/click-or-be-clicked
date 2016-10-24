@@ -19,11 +19,7 @@ export default new class firebaseHelpers {
     
     this.database = firebase.database();
   }
-  
-  getOnlinePlayers () {
-    return this.database.ref('users-active');
-  }
-  
+
   addNewGame (blocks) {
     let gameKey = this.database.ref('games').push().key;
     

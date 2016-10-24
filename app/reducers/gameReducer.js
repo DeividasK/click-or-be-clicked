@@ -1,5 +1,8 @@
 export default function reducer(state = {
-    id: null
+    id: null,
+    gameRequestSent: false,
+    gameRequestReceived: false,
+    gameInProgress: false
   }, action) {
   
   switch(action.type) {

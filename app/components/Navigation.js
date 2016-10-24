@@ -30,7 +30,7 @@ export default class Navigation extends React.Component {
   
           <div className="navbar-header">
             
-            <Auth isAuthenticated={ this.props.user.auth } onSignIn={ this.handleSignIn } onSignOut={ this.handleSignOut.bind(this) } />
+            <Auth isAuthenticated={ this.props.user.auth } authPending={ this.props.user.authPending } onSignIn={ this.handleSignIn } onSignOut={ this.handleSignOut.bind(this) } />
             
             <Link to='/' className="navbar-brand">
               Click or be clicked

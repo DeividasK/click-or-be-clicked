@@ -9,9 +9,10 @@ export function authenticate() {
       if (user) {
         dispatch({ type: 'AUTHENTICATE_FULFILLED', payload: user });
         firebase.database().ref('users-active/' + user.uid).set({
-            name: user.displayName,
-            email: user.email,
-            image: user.photoURL
+          uid: user.uid,
+          name: user.displayName,
+          email: user.email,
+          image: user.photoURL
         });
       } else {
         dispatch({ type: 'AUTHENTICATE_REJECTED' });
@@ -39,4 +40,22 @@ export function signOut(userId) {
       dispatch({ type: 'SIGN_OUT_REJECTED'});
     });
   });
+}
+
+export function getActiveUsers() {
+  store.dispatch((dispatch) => {
+    dispatch({ type: 'ACTIVE_USERS_LISTENING'});
+
+    firebase.database().ref('users-active').on('value', (snapshot) => {
+      dispatch({ type: 'ACTIVE_USERS_CHANGED', payload: snapshot.val() });
+    });
+  });
+}
+
+export function selectPlayer(uid) {
+  store.dispatch({ type: 'PLAYER_SELECTED', payload: uid});
+}
+
+export function deselectPlayer() {
+  store.dispatch({ type: 'PLAYER_DESELECTED' });
 }

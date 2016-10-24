@@ -1,29 +1,28 @@
 import React from 'react';
-import firebase from '../utils/firebaseHelpers.js';
+import { connect } from 'react-redux';
+
+import { getActiveUsers, selectPlayer, deselectPlayer } from '../actions/userActions'
 import Players from '../components/Players';
+
+@connect((store) => {
+    return {
+        players: store.players.list,
+        selected: store.players.selected
+    };
+})
 
 export default class PlayersContainer extends React.Component {
   
-  constructor () {
-    super();
-    this.state = { players: [] };
+  componentWillMount () {
+    getActiveUsers();
   }
   
-  componentWillMount () {
-    var playerList = firebase.getOnlinePlayers();
-    
-    playerList.on('value', function(snapshot) {
-      var data = [];
-      
-      var players = snapshot.val();
-      
-      for (let index in players) {
-        data.push(players[index]);
-      }
-      
-      this.setState({ players: data });
-      
-    }.bind(this));
+  selectHandler (uid) {
+    (this.props.selected === uid) ? deselectPlayer() : selectPlayer(uid);
+  }
+  
+  activeHandler (uid) {
+    return (this.props.selected === uid) ? 'active' : '';
   }
   
   render() {
@@ -33,7 +32,7 @@ export default class PlayersContainer extends React.Component {
           Online players
         </div>
         <div className="panel-body">
-          <Players list={ this.state.players } />
+          <Players list={ this.props.players } onSelect={ this.selectHandler.bind(this) } active={ this.activeHandler.bind(this) } />
         </div>
       </div>
     )
