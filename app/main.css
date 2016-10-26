@@ -73,3 +73,7 @@
 .navbar-toggle {
   display: inline-block !important;
 }
+
+.modal {
+  background-color: rgba(0,0,0,0.4);
+}

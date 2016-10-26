@@ -14,7 +14,7 @@ export default class Routes extends React.Component {
     return (<Router history={hashHistory}>
       <Route path='/' component={Main}>
         <IndexRoute component={Home} />
-        <Route path='initiate' component={Initiate} />
+        <Route path='initiate/:playerTwo' component={Initiate} />
         <Route path='battle/:boardId' component={BattleContainer} />
       </Route>
     </Router>)

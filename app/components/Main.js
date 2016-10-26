@@ -1,13 +1,13 @@
-import React from 'react'
-import { connect } from 'react-redux'
+require('../main.css');
 
-import ReactCSSTransitionGroup from 'react-addons-css-transition-group'
-import firebaseHelpers from '../utils/firebaseHelpers'
-import Navigation from './Navigation'
-import PlayersContainer from '../containers/PlayersContainer'
-import styles from '../styles'
-require('../main.css')
-import { authenticate } from '../actions/userActions'
+import React from 'react';
+import { connect } from 'react-redux';
+
+import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
+import Navigation from './Navigation';
+import PlayersContainer from '../containers/PlayersContainer';
+import { authenticate } from '../actions/userActions';
+import ModalContainer from '../containers/ModalContainer';
 
 @connect((store) => {
     return {
@@ -22,7 +22,6 @@ export default class Main extends React.Component {
     }
     
     render () {
-        console.log(this.props.user);
         return (
             <div className="container-fluid padding-top">
                 <div className="row">
@@ -46,6 +45,7 @@ export default class Main extends React.Component {
                         <PlayersContainer />
                     </div>
                 </div>
+                <ModalContainer />
             </div>
         )
     }

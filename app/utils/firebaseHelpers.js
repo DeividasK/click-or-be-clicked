@@ -19,15 +19,6 @@ export default new class firebaseHelpers {
     
     this.database = firebase.database();
   }
-
-  addNewGame (blocks) {
-    let gameKey = this.database.ref('games').push().key;
-    
-    this.database.ref('games/' + gameKey).set({
-      players: { blue: '', red: '' },
-      blocks: blocks
-    });
-  }
   
   updateGame (block, id) {
     return this.database.ref('games/' + id + '/blocks/' + block.blockId).set(block.color);

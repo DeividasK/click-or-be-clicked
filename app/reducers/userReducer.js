@@ -8,7 +8,7 @@ export default function reducer(state = {
     auth: false,
     authPending: false
   }, action) {
-  
+
   switch(action.type) {
     case "AUTHENTICATE_PENDING": {
       state = { ...state, authPending: true };
@@ -16,7 +16,6 @@ export default function reducer(state = {
     }
     
     case "AUTHENTICATE_FULFILLED": {
-      console.log(action.payload);
       state = {
         ...state,
         authPending: false,

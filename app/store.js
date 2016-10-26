@@ -5,6 +5,6 @@ import thunk from 'redux-thunk'
 
 import reducer from './reducers'
 
-const middleware = applyMiddleware(promise(), thunk, logger());
+const middleware = applyMiddleware(promise(), thunk, logger({ collapsed: true }));
 
 export default createStore(reducer, middleware);

@@ -9,7 +9,6 @@ export default class Players extends React.Component {
     return (
       <div className="list-group">
         { this.props.list.map((player) => {
-        console.log(player);
           return ( <div className={ "list-group-item noselect " + this.props.active(player.uid) } key={ player.uid } onClick={ () => this.props.onSelect(player.uid) }>
             <img src={ player.image } alt={ player.name } className="img-responsive player-img" /><span className='player-name'>{ player.name }</span>
           </div> )

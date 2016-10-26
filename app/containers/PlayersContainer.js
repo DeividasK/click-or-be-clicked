@@ -1,9 +1,8 @@
 import React from 'react';
-import { connect } from 'react-redux';
-
 import { getActiveUsers, selectPlayer, deselectPlayer } from '../actions/userActions'
 import Players from '../components/Players';
 
+import { connect } from 'react-redux';
 @connect((store) => {
     return {
         players: store.players.list,

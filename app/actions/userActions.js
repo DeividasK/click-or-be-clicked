@@ -31,7 +31,6 @@ export function signIn() {
 export function signOut(userId) {
   return store.dispatch((dispatch) => {
     dispatch({ type: 'SIGN_OUT_PENDING'});
-    console.log('User ID', userId);
     firebase.database().ref('users-active/' + userId).remove();
     
     return firebase.auth().signOut().then(function() {
