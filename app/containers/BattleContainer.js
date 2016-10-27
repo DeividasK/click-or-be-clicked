@@ -27,8 +27,8 @@ export default class BattleContainer extends React.Component {
   
   render () {
     return (
-      <div>
-        <button className='btn btn-default' onClick={ this.exit.bind(this) }>End game</button>     
+      <div className="row">
+        <button className='btn btn-default' onClick={ this.exit.bind(this) }>End game</button>  
         <Battle
           board={ this.props.game.board }
           gameId={ this.props.game.id }
