@@ -6,7 +6,6 @@ var IndexRoute = ReactRouter.IndexRoute;
 var hashHistory = ReactRouter.hashHistory;
 import Main from '../components/Main';
 import Home from '../components/Home';
-import Initiate from '../components/Initiate';
 import BattleContainer from '../containers/BattleContainer';
 
 export default class Routes extends React.Component {
@@ -14,8 +13,7 @@ export default class Routes extends React.Component {
     return (<Router history={hashHistory}>
       <Route path='/' component={Main}>
         <IndexRoute component={Home} />
-        <Route path='initiate/:playerTwo' component={Initiate} />
-        <Route path='battle/:boardId' component={BattleContainer} />
+        <Route path='battle' component={BattleContainer} />
       </Route>
     </Router>)
   }

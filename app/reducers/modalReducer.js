@@ -66,7 +66,26 @@ export default function reducer(state = {
           success: action.payload.content.success
         }
       };
+
+    case 'GAME_REQUEST_ACCEPTED':
+      return {
+        ...state,
+        open: false,
+        success: {
+          handler: false,
+          arguments: false
+        },
+        callback: null,
+        callbackArg: null
+      };
+      
+    case 'GAME_STARTED':
+      return {
+        ...state,
+        open: false
+      }
+      
+    default:
+      return state;
   }
-  
-  return state;
 }

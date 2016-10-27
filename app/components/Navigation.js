@@ -1,14 +1,11 @@
-import React from 'react'
-import { connect } from 'react-redux'
-import firebaseHelpers from '../utils/firebaseHelpers.js'
-import Auth from './Auth'
+import React from 'react';
+import Auth from './Auth';
+var ReactRouter = require('react-router');
+var Link = ReactRouter.Link;
+import { signIn, signOut } from '../actions/userActions';
 
-var firebase = require('firebase/app')
-var ReactRouter = require('react-router')
-var Link = ReactRouter.Link
 
-import { signIn, signOut } from '../actions/userActions'
-
+import { connect } from 'react-redux';
 @connect((store) => {
     return {
         user: store.user

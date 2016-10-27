@@ -1,13 +1,14 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { hashHistory } from 'react-router';
-import { sendGameRequest, cancelGameRequest, rejectGame, getGames, acceptGame } from '../actions/gameActions';
+import { sendGameRequest, cancelGameRequest, rejectGame, getGames, stopGames, acceptGame } from '../actions/gameActions';
 import { modalOpen } from '../actions/modalActions';
 
 @connect((store) => {
     return {
         player: store.user.data.id,
         opponent: store.players.selected,
+        game: store.game,
         gameKey: store.game.id,
         players: store.players.object
     };
@@ -27,11 +28,11 @@ export default class Home extends React.Component {
   }
   
   componentWillMount () {
-    getGames(rejectGame, acceptGame);
+    getGames(rejectGame, acceptGame.bind(this));
   }
   
   componentWillUnmount () {
-    cancelGameRequest(this.props.gameKey);
+    stopGames();
   }
   
   render () {

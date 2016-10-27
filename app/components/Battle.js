@@ -1,12 +1,37 @@
 import React from 'react';
 import BattleRow from '../components/BattleRow';
+import { createNewBoard } from '../utils/gameHelpers';
 
-export default class BattleContainer extends React.Component {
+export default class Battle extends React.Component {
+  constructor (props) {
+    super();
+    this.state = createNewBoard(props.board);
+  }
+  
+  componentWillMount () {
+
+  }
+  
+  componentWillReceiveProps (props) {
+    this.setState(createNewBoard(props.board));
+  }
+  
   render () {
     return (
-      <div className="row">
-        <div className="col-xs-12">
-          { this.props.list.map((row) => { return <BattleRow blocks={ row.blocks } key={ row.key }/> })}
+      <div id="battleContainer">
+        <div className="row">
+          <div className="col-xs-6">
+            Blue<br />{ this.state.blue }
+          </div>
+          <div className="col-xs-6">
+            Red<br />{ this.state.red }
+          </div>
+        </div>
+        
+        <div className="row">
+          <div className="col-xs-12">
+            { this.state.list.map((row) => { return <BattleRow blocks={ row.blocks } key={ row.key } gameId={ this.props.gameId }/> })}
+          </div>
         </div>
       </div>
     )

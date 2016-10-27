@@ -1,5 +1,5 @@
 import React from 'react';
-import firebaseHelpers from '../utils/firebaseHelpers';
+import { updateGame } from '../actions/gameActions';
 
 export default class BattleBlock extends React.Component {
   
@@ -26,7 +26,7 @@ export default class BattleBlock extends React.Component {
     
     var sound = new Audio("blop.mp3");
     sound.play();
-    firebaseHelpers.updateGame(this.state, this.props.params.boardId);
+    updateGame(this.state, this.props.gameId);
   }
   
   render () {
