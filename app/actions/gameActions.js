@@ -66,8 +66,11 @@ export function updateBoard(gameKey) {
   }.bind(this));
 }
 
-export function endGame() {
-  
+export function exitGame(gameKey) {
+  firebase.database().ref('games/' + gameKey).update({
+    ended: true
+  });
+  hashHistory.push('/');
 }
 
 export function stopGames() {
@@ -80,7 +83,7 @@ export function getGames(modalDangerCallback, modalSuccessCallback) {
     dispatch({ type: 'GAMES_LISTENING'});
 
     firebase.database().ref('games').on('child_added', (data) => {
-      if (store.getState().user.data.id !== data.val().players.red) { return; }
+      if (store.getState().user.data.id !== data.val().players.red || data.val().ended === true) { return; }
       
       dispatch({ type: 'GAME_ADDED', payload: {
         gameKey: data.key,

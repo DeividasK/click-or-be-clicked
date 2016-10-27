@@ -1,6 +1,6 @@
 import React from 'react';
 import Battle from '../components/Battle';
-import { updateBoard } from '../actions/gameActions';
+import { updateBoard, exitGame } from '../actions/gameActions';
 
 import { connect } from 'react-redux';
 @connect((store) => {
@@ -13,9 +13,17 @@ export default class BattleContainer extends React.Component {
   componentWillMount () {
     updateBoard(this.props.game.id);
   }
+  
+  exit () {
+    exitGame(this.props.game.id);
+  }
+  
   render () {
     return (
-      <Battle board={ this.props.game.board } gameId={ this.props.game.id }/>
+      <div>
+        <button className='btn btn-default' onClick={ this.exit.bind(this) }>End game</button>     
+        <Battle board={ this.props.game.board } gameId={ this.props.game.id }/>
+      </div>
     );
   }
 }
