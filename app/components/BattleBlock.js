@@ -20,6 +20,8 @@ export default class BattleBlock extends React.Component {
   }
   
   handleClick (e) {
+    if (this.props.userColor === this.state.color) { return; }
+    
     this.state.color = (this.state.color === 'red') ? 'blue' : 'red';
     
     this.setState(this.state);

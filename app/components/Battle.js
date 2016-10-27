@@ -17,14 +17,14 @@ export default class Battle extends React.Component {
       <div id="battleContainer">
 
         <div className="col-xs-6">
-          Blue<br />{ this.state.blue }
+          { this.props.blue }<br />Blue player<br />{ this.state.blue }
         </div>
         <div className="col-xs-6">
-          Red<br />{ this.state.red }
+          { this.props.red }<br />Red player<br />{ this.state.red }
         </div>
 
         <div className="col-xs-12">
-          { this.state.list.map((row) => { return <BattleRow blocks={ row.blocks } key={ row.key } gameId={ this.props.gameId }/> })}
+          { this.state.list.map((row) => { return <BattleRow userColor={ this.props.userColor } blocks={ row.blocks } key={ row.key } gameId={ this.props.gameId }/> })}
         </div>
 
       </div>

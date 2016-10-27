@@ -5,20 +5,23 @@ export default function reducer(state = {
     gameRequestReceived: false,
     gameInProgress: false,
     boardSize: 6,
-    list: [],
     board: {},
-    red: 18,
-    blue: 18,
   }, action) {
     
   var newState = Object.assign({}, state);
   
   switch(action.type) {
     case 'GAME_REQUEST_SENT':
-      return { ...state, gameRequestSent: true, id: action.payload.gameKey };
+      newState.gameRequestSent = true;
+      newState.id = action.payload.gameKey;
+      newState.players = action.payload.players;
+      return newState;
       
     case 'GAME_ADDED':
-      return { ...state, gameRequestReceived: true, id: action.payload.gameKey, opponentId: action.payload.opponent };
+      newState.gameRequestReceived = true;
+      newState.id = action.payload.gameKey;
+      newState.players = action.payload.players;
+      return newState;
     
     case 'GAME_REMOVED':
       return { ...state, gameRequestReceived: false, id: action.payload.gameKey };
@@ -36,8 +39,7 @@ export default function reducer(state = {
         ...state,
         gameRequestSent: false,
         gameInProgress: true,
-        board: action.payload.board,
-        list: action.payload.list
+        board: action.payload,
       };
       
     case 'GAME_BOARD_CHANGED':

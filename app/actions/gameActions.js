@@ -13,8 +13,7 @@ export function sendGameRequest(playerOneUid, playerTwoUid, playerTwoName) {
   
   store.dispatch({ type: 'GAME_REQUEST_SENT', payload: {
     gameKey: gameKey,
-    playerOne: playerOneUid,
-    playerTwo: playerTwoUid,
+    players: { blue: playerOneUid, red: playerTwoUid },
     content: {
       header: "Game request sent",
       body: "Waiting for a response from " + playerTwoName + ".",
@@ -24,9 +23,7 @@ export function sendGameRequest(playerOneUid, playerTwoUid, playerTwoName) {
   
   firebase.database().ref('games/' + gameKey).on('child_added', (data) => {
     if (data.key !== 'board') { return; }
-    store.dispatch({ type: 'GAME_STARTED', payload: {
-      board: data.val()
-    } });
+    store.dispatch({ type: 'GAME_STARTED', payload: data.val() });
     hashHistory.push('/battle');
   });
 }
@@ -87,7 +84,7 @@ export function getGames(modalDangerCallback, modalSuccessCallback) {
       
       dispatch({ type: 'GAME_ADDED', payload: {
         gameKey: data.key,
-        opponent: data.val().players.blue,
+        players: { blue: data.val().players.blue, red: data.val().players.red },
         rejectGame: modalDangerCallback,
         successHandler: modalSuccessCallback,
         content: {

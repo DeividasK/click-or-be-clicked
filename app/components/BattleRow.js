@@ -6,7 +6,7 @@ export default class BattleRow extends React.Component {
     return (
       <div className="row">
         {this.props.blocks.map(function(block){
-          return <BattleBlock key={ block.key } blockId={ block.key } color={ block.color } gameId={ this.props.gameId }/>;
+          return <BattleBlock userColor={ this.props.userColor } key={ block.key } blockId={ block.key } color={ block.color } gameId={ this.props.gameId }/>;
         }.bind(this))}
 
       </div>
