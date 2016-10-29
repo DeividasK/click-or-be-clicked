@@ -14,11 +14,11 @@
 }
 
 .red {
-  background-color: red;
+  background-color: #e74c3c;
 }
 
 .blue {
-  background-color: blue;
+  background-color: #3498db;
 }
 
 .box {
@@ -76,4 +76,20 @@
 
 .modal {
   background-color: rgba(0,0,0,0.4);
+}
+
+.bottom-padding {
+  padding-bottom: 15px;
+}
+
+.well p {
+  margin: 0;
+}
+
+.well.blue p {
+  font-size: 42px;
+}
+
+.well.red p {
+  font-size: 42px;
 }

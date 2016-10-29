@@ -4,8 +4,8 @@ export default function reducer(state = {
     gameRequestSent: false,
     gameRequestReceived: false,
     gameInProgress: false,
-    boardSize: 6,
     board: {},
+    players: { blue: '', red: '' },
   }, action) {
     
   var newState = Object.assign({}, state);
@@ -44,6 +44,13 @@ export default function reducer(state = {
       
     case 'GAME_BOARD_CHANGED':
       newState.board[action.payload.key] = action.payload.value;
+      return newState;
+      
+    case 'GAME_RESUMED':
+      newState.id = action.payload.gameKey;
+      newState.board = action.payload.board;
+      newState.players = action.payload.players;
+      newState.gameInProgress = true;
       return newState;
 
     default:

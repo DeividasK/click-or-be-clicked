@@ -37,7 +37,7 @@ export default class Home extends React.Component {
   
   render () {
     return (
-      <div>
+      <div className="text-center">
         <h1>Click or BE clicked</h1>
         <p className='lead'>Speed is your friend.</p>
         <button className='btn btn-default' onClick={ this.initiateBattle } disabled={ ! this.props.opponent }>Initiate the battle!</button>

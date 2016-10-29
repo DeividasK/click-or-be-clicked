@@ -13,7 +13,7 @@ export default class Routes extends React.Component {
     return (<Router history={hashHistory}>
       <Route path='/' component={Main}>
         <IndexRoute component={Home} />
-        <Route path='battle' component={BattleContainer} />
+        <Route path='battle/:id' component={BattleContainer} />
       </Route>
     </Router>)
   }
