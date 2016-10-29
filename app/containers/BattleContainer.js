@@ -21,10 +21,6 @@ export default class BattleContainer extends React.Component {
     this.handleClick = this.handleClick.bind(this);
   }
 
-  componentWillReceiveProps (props) {
-
-  }
-
   componentWillMount () {
     updateBoard(this.props.routeParams.id);
   }

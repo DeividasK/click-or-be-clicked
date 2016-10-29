@@ -88,7 +88,8 @@ export function getGames(modalDangerCallback, modalSuccessCallback) {
 
       dispatch({ type: 'GAME_ADDED', payload: {
         gameKey: data.key,
-        players: { blue: data.val().players.blue, red: data.val().players.red },
+        players: data.val().players,
+        actions: data.val().actions,
         rejectGame: modalDangerCallback,
         successHandler: modalSuccessCallback,
         content: {
