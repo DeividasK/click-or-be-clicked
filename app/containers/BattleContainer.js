@@ -2,6 +2,8 @@ import React from 'react';
 import Battle from '../components/Battle';
 import { resumeGame, updateBoard, exitGame, updateGame, newShape } from '../actions/gameActions';
 
+const shapesList = ['X','+','<', '>']; //'v','^',;
+
 // Returns a random integer between min (included) and max (included)
 // Using Math.round() will give you a non-uniform distribution!
 function getRandomInt(min, max) {
@@ -11,8 +13,6 @@ function getRandomInt(min, max) {
 }
 
 function getRandomShape() {
-  let shapesList = ['X','+','<', '>']; //'v','^',;
-
   return shapesList[getRandomInt(0, shapesList.length)];
 }
 
@@ -173,6 +173,7 @@ export default class BattleContainer extends React.Component {
             onClick={ this.handleClick }
             count={ this.props.game.actions[this.props.game.my.color] }
             shapes={ this.props.game.my.shapes }
+            availableShapes={ shapesList }
           />
         </div>
       </div>

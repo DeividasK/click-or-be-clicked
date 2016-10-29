@@ -37,9 +37,13 @@ export default class Battle extends React.Component {
           { this.state.red }
         </PlayerWrapper>
 
+        <div className="col-xs-12 text-center">
+          Available shapes: { this.props.availableShapes }
+        </div>
+
         <div className="col-xs-6">
           <p>
-            Formos:<br />
+            Shapes:<br />
             <span className="shapes">
               { this.props.shapes.map((shape, index) => {
                 let separator = (index !== 0) ? ' ' : '';
