@@ -59,13 +59,13 @@ function rightBlock(blockId, userColor) {
   if (firstTopBlock > 0 && firstTopBlock % 6 !== 0) blocks[firstTopBlock] = userColor;
 
   let secondTopBlock = blockId - 14;
-  if (secondTopBlock > 0 && firstTopBlock % 6 !== 0 && secondTopBlock % 6 !== 5) blocks[secondTopBlock] = userColor;
+  if (secondTopBlock > 0 && secondTopBlock % 6 !== 0 && secondTopBlock % 6 !== 5) blocks[secondTopBlock] = userColor;
 
   let firstBottomBlock = blockId + 5;
   if (firstBottomBlock < 37 && firstBottomBlock % 6 !== 0) blocks[firstBottomBlock] = userColor;
 
   let secondBottomBlock = blockId + 10;
-  if (secondBottomBlock < 37 && firstBottomBlock % 6 !== 0 && secondBottomBlock % 6 !== 5) blocks[secondBottomBlock] = userColor;
+  if (secondBottomBlock < 37 && secondBottomBlock % 6 !== 0 && secondBottomBlock % 6 !== 5) blocks[secondBottomBlock] = userColor;
 
   return blocks;
 }
@@ -77,13 +77,13 @@ function leftBlock(blockId, userColor) {
   if (firstTopBlock > 0 && firstTopBlock % 6 !== 1) blocks[firstTopBlock] = userColor;
 
   let secondTopBlock = blockId - 10;
-  if (secondTopBlock > 0 && firstTopBlock % 6 !== 1 && secondTopBlock % 6 !== 2) blocks[secondTopBlock] = userColor;
+  if (secondTopBlock > 0 && secondTopBlock % 6 !== 1 && secondTopBlock % 6 !== 2) blocks[secondTopBlock] = userColor;
 
   let firstBottomBlock = blockId + 7;
   if (firstBottomBlock < 37 && firstBottomBlock % 6 !== 1) blocks[firstBottomBlock] = userColor;
 
   let secondBottomBlock = blockId + 14;
-  if (secondBottomBlock < 37 && firstBottomBlock % 6 !== 1 && secondBottomBlock % 6 !== 2) blocks[secondBottomBlock] = userColor;
+  if (secondBottomBlock < 37 && secondBottomBlock % 6 !== 1 && secondBottomBlock % 6 !== 2) blocks[secondBottomBlock] = userColor;
 
   return blocks;
 }
