@@ -6,21 +6,25 @@ import { createNewBoard } from '../utils/gameHelpers';
 export function sendGameRequest(playerOneUid, playerTwoUid, playerTwoName) {
 
   let gameKey = firebase.database().ref('games').push().key;
-  
+  let players = { blue: playerOneUid, red: playerTwoUid };
+  let actions = { blue: 30, red: 30 };
+
   firebase.database().ref('games/' + gameKey).set({
-    players: { blue: playerOneUid, red: playerTwoUid }
+    players: players,
+    actions: actions,
   });
-  
+
   store.dispatch({ type: 'GAME_REQUEST_SENT', payload: {
     gameKey: gameKey,
-    players: { blue: playerOneUid, red: playerTwoUid },
+    players: players,
+    actions: actions,
     content: {
       header: "Game request sent",
       body: "Waiting for a response from " + playerTwoName + ".",
       danger: "Cancel"
     }
   }});
-  
+
   firebase.database().ref('games/' + gameKey).on('child_added', (data) => {
     if (data.key !== 'board') { return; }
     store.dispatch({ type: 'GAME_STARTED', payload: data.val() });
@@ -30,7 +34,7 @@ export function sendGameRequest(playerOneUid, playerTwoUid, playerTwoName) {
 
 export function cancelGameRequest(gameKey) {
   firebase.database().ref('games/' + gameKey).remove();
-  
+
   store.dispatch({ type: 'GAME_REQUEST_CANCELED', payload: {
     'gameKey': gameKey
   }});
@@ -47,10 +51,10 @@ export function acceptGame() {
 
 export function rejectGame(gameKey) {
   firebase.database().ref('games/' + gameKey).remove();
-  
+
   store.dispatch({ type: 'GAME_REQUEST_REJECTED', payload: {
     'gameKey': gameKey
-  }});  
+  }});
 }
 
 export function updateBoard(gameKey) {
@@ -59,7 +63,7 @@ export function updateBoard(gameKey) {
       key: data.key,
       value: data.val()
     }});
-    
+
   }.bind(this));
 }
 
@@ -81,7 +85,7 @@ export function getGames(modalDangerCallback, modalSuccessCallback) {
 
     firebase.database().ref('games').on('child_added', (data) => {
       if (store.getState().user.data.id !== data.val().players.red || data.val().ended === true) { return; }
-      
+
       dispatch({ type: 'GAME_ADDED', payload: {
         gameKey: data.key,
         players: { blue: data.val().players.blue, red: data.val().players.red },
@@ -95,10 +99,10 @@ export function getGames(modalDangerCallback, modalSuccessCallback) {
         }
       } });
     });
-    
+
     firebase.database().ref('games').on('child_removed', (data) => {
       if (store.getState().game.id !== data.key) { return; }
-      
+
       dispatch({ type: 'GAME_REMOVED', payload: {
         gameKey: data.key,
         opponent: data.val().players.blue
@@ -107,19 +111,29 @@ export function getGames(modalDangerCallback, modalSuccessCallback) {
   });
 }
 
-export function updateGame(block, id) {
-  return firebase.database().ref('games/' + id + '/board/' + block.blockId).set(block.color);
+export function updateGame(gameKey, blocks, playerColor, actionsLeft) {
+  let actions = {};
+  actions[playerColor] = actionsLeft;
+
+  store.dispatch({ type: 'BLOCK_CLICK', payload: {
+    board: blocks,
+    actions: actions
+  }});
+
+  firebase.database().ref(`games/${gameKey}/board`).update(blocks);
+  firebase.database().ref(`games/${gameKey}/actions`).update(actions);
 }
 
 export function resumeGame(gameKey) {
   firebase.database().ref('games/' + gameKey).once('value', (data) => {
-    console.log(data.val());
-    
+    let color = (store.getState().user.data.id === data.val().players.red) ? 'red' : 'blue';
+
     store.dispatch({ type: 'GAME_RESUMED', payload: {
       gameKey: gameKey,
       players: data.val().players,
-      board: data.val().board
+      actions: data.val().actions,
+      board: data.val().board,
+      color: color,
     }});
   });
-  
 }

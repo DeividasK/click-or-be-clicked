@@ -1,7 +1,10 @@
 import React from 'react';
-import BattleRow from '../components/BattleRow';
+import { BattleRow } from '../components/BattleRow';
+import { BattleBlock } from './BattleBlock';
+
 import { createNewBoard } from '../utils/gameHelpers';
 import { PlayerWrapper } from '../components/PlayerWrapper';
+import { Counter } from './Counter';
 
 export default class Battle extends React.Component {
   constructor (props) {
@@ -34,8 +37,25 @@ export default class Battle extends React.Component {
           { this.state.red }
         </PlayerWrapper>
 
+        <Counter count={ this.props.count }/>
+
         <div className="col-xs-12">
-          { this.state.list.map((row) => { return <BattleRow userColor={ this.props.userColor } blocks={ row.blocks } key={ row.key } gameId={ this.props.gameId }/> })}
+          { this.state.list.map((row) => {
+            return (
+              <BattleRow key={ row.key }>
+                { row.blocks.map((block) => {
+                  return ( <BattleBlock
+                    userColor={ this.props.userColor }
+                    key={ block.key }
+                    blockId={ block.key }
+                    color={ block.color }
+                    gameId={ this.props.gameId }
+                    handleClick={ this.props.onClick }
+                  /> );
+                })}
+              </BattleRow>
+            )
+          })}
         </div>
 
       </div>

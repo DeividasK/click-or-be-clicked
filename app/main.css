@@ -1,3 +1,12 @@
+.actions {
+  font-size: 24px;
+}
+
+.actions .count {
+  font-size: 42px;
+  font-weight: bold;
+}
+
 .appear-enter {
   transition-duration: .7s;
   transition-property: opacity;
