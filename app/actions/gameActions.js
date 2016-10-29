@@ -138,3 +138,7 @@ export function resumeGame(gameKey) {
     }});
   });
 }
+
+export function newShape(newShape) {
+  store.dispatch({ type: 'NEW_SHAPE', payload: newShape });
+}

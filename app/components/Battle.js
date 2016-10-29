@@ -37,7 +37,20 @@ export default class Battle extends React.Component {
           { this.state.red }
         </PlayerWrapper>
 
-        <Counter count={ this.props.count }/>
+        <div className="col-xs-6">
+          <p>
+            Formos:<br />
+            <span className="shapes">
+              { this.props.shapes.map((shape, index) => {
+                let separator = (index !== 0) ? ' ' : '';
+                return <span key={index}>{separator + shape}</span>;
+              })}
+            </span>
+          </p>
+        </div>
+        <div className="col-xs-6">
+          <Counter count={ this.props.count }/>
+        </div>
 
         <div className="col-xs-12">
           { this.state.list.map((row) => {

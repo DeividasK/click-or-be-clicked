@@ -7,7 +7,8 @@ export default function reducer(state = {
     players: { blue: '', red: '' },
     actions: { blue: 30, red: 30 },
     my: {
-      color: ''
+      color: '',
+      shapes: ['.'],
     },
   }, action) {
 
@@ -20,6 +21,7 @@ export default function reducer(state = {
       newState.players = action.payload.players;
       newState.actions = action.payload.actions;
       newState.my.color = 'blue';
+      newState.my.shapes = ['.'];
       return newState;
 
     case 'GAME_ADDED':
@@ -28,6 +30,7 @@ export default function reducer(state = {
       newState.players = action.payload.players;
       newState.actions = action.payload.actions;
       newState.my.color = 'red';
+      newState.my.shapes = ['.'];
       return newState;
 
     case 'GAME_REMOVED':
@@ -65,6 +68,11 @@ export default function reducer(state = {
     case 'BLOCK_CLICK':
       newState.board = Object.assign(newState.board, action.payload.board);
       newState.actions = Object.assign(newState.actions, action.payload.actions);
+      return newState;
+
+    case 'NEW_SHAPE':
+      newState.my.shapes.shift();
+      newState.my.shapes.push(action.payload);
       return newState;
 
     default:
