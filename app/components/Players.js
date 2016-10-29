@@ -1,4 +1,5 @@
 import React from 'react';
+import { Player } from './Player';
 
 export default class Players extends React.Component {
   render() {
@@ -10,7 +11,7 @@ export default class Players extends React.Component {
       <div className="list-group">
         { this.props.list.map((player) => {
           return ( <div className={ "list-group-item noselect " + this.props.active(player.uid) } key={ player.uid } onClick={ () => this.props.onSelect(player.uid) }>
-            <img src={ player.image } alt={ player.name } className="img-responsive player-img" /><span className='player-name'>{ player.name }</span>
+              <Player image={ player.image } name={ player.name} />
           </div> )
         }) }
       </div>

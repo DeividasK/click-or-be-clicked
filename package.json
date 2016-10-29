@@ -38,7 +38,8 @@
   },
   "scripts": {
     "production": "webpack -p",
-    "start": "webpack-dev-server -d  --host $IP --port $PORT  --hot --inline"
+    "start": "webpack-dev-server -d  --host $IP --port $PORT  --hot --inline",
+    "start-local": "webpack-dev-server -d --hot --inline"
   },
   "repository": {
     "type": "git",

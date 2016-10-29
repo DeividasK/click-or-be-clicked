@@ -14,7 +14,7 @@ export default function reducer(state = {
       state = { ...state, authPending: true };
       break;
     }
-    
+
     case "AUTHENTICATE_FULFILLED": {
       state = {
         ...state,
@@ -29,12 +29,12 @@ export default function reducer(state = {
       };
       break;
     }
-    
+
     case "AUTHENTICATE_REJECTED": {
       state = { ...state, authPending: false, auth: false };
       break;
     }
   }
-  
+
   return state;
 }
