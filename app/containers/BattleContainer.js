@@ -15,7 +15,9 @@ export default class BattleContainer extends React.Component {
 
   constructor (props) {
     super();
-    resumeGame(props.routeParams.id);
+    if (props.game.id === null) {
+      resumeGame(props.routeParams.id);
+    }
     this.handleClick = this.handleClick.bind(this);
   }
 
@@ -42,7 +44,22 @@ export default class BattleContainer extends React.Component {
     let sound = new Audio("blop.mp3").play();
 
     let blocks = {};
-    blocks[blockId] = (blockColor === 'red') ? 'blue' : 'red';
+    blocks[blockId] = userColor;
+
+    if (actionsLeft < 25) {
+      let topBlock = blockId - 6;
+      if (topBlock > 0) blocks[topBlock] = userColor;
+
+      let bottomBlock = blockId + 6;
+      if (bottomBlock < 37) blocks[bottomBlock] = userColor;
+
+      let leftBlock = blockId - 1;
+      if (leftBlock % 6 !== 0) blocks[leftBlock] = userColor;
+
+      let rightBlock = blockId + 1;
+      if (rightBlock % 6 !== 1) blocks[rightBlock] = userColor;
+    }
+
 
     updateGame(this.props.game.id, blocks, userColor, actionsLeft);
   }
