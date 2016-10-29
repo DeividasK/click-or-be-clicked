@@ -33,6 +33,16 @@
   margin: 15px 0;
 }
 
+#battleContainer .col-xs-6:nth-child(even) {
+  padding-right: 0;
+  padding-left: 7.5px;
+}
+
+#battleContainer .col-xs-6:nth-child(odd) {
+  padding-right: 7.5px;
+  padding-left: 0;
+}
+
 .col-xs-2 {
   padding: 0;
   border: 1px solid black;
