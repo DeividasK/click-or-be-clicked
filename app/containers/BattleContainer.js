@@ -11,7 +11,7 @@ function getRandomInt(min, max) {
 }
 
 function getRandomShape() {
-  let shapesList = ['<', '>']; //, 'X','+','v','^',;
+  let shapesList = ['X','+','<', '>']; //'v','^',;
 
   return shapesList[getRandomInt(0, shapesList.length)];
 }
