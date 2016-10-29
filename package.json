@@ -1,6 +1,6 @@
 {
   "name": "click-or-be-clicked",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "A game where you have to faster than your opponent",
   "main": "index.js",
   "dependencies": {
