@@ -18,7 +18,7 @@ export default class Battle extends React.Component {
       <div id="battleContainer">
 
         <PlayerWrapper>
-            { this.props.blue !== undefined && this.props.blue.name }<br /> <br />Blue player
+            { this.props.blue !== undefined && this.props.blue.name }
         </PlayerWrapper>
 
 
@@ -27,9 +27,9 @@ export default class Battle extends React.Component {
         </PlayerWrapper>
 
         <PlayerWrapper>
-          { this.props.red !== undefined && this.props.red.name }<br /> <br />Red player
+          { this.props.red !== undefined && this.props.red.name }
         </PlayerWrapper>
-        
+
         <PlayerWrapper addClass="red">
           { this.state.red }
         </PlayerWrapper>
