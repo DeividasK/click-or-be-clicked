@@ -24,7 +24,7 @@ export function sendGameRequest(playerOneUid, playerTwoUid, playerTwoName) {
   firebase.database().ref('games/' + gameKey).on('child_added', (data) => {
     if (data.key !== 'board') { return; }
     store.dispatch({ type: 'GAME_STARTED', payload: data.val() });
-    hashHistory.push('/battle');
+    hashHistory.push('/battle/' + gameKey);
   });
 }
 
@@ -42,7 +42,7 @@ export function acceptGame() {
   firebase.database().ref('games/' + this.props.gameKey).update({
     board: payload
   });
-  hashHistory.push('/battle');
+  hashHistory.push('/battle/' + this.props.gameKey);
 }
 
 export function rejectGame(gameKey) {
@@ -109,4 +109,17 @@ export function getGames(modalDangerCallback, modalSuccessCallback) {
 
 export function updateGame(block, id) {
   return firebase.database().ref('games/' + id + '/board/' + block.blockId).set(block.color);
+}
+
+export function resumeGame(gameKey) {
+  firebase.database().ref('games/' + gameKey).once('value', (data) => {
+    console.log(data.val());
+    
+    store.dispatch({ type: 'GAME_RESUMED', payload: {
+      gameKey: gameKey,
+      players: data.val().players,
+      board: data.val().board
+    }});
+  });
+  
 }

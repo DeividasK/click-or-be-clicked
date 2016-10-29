@@ -31,7 +31,7 @@ export default class Main extends React.Component {
                 </div>
                 
                 <div className="row">
-                    <div className="col-sm-9 col-sm-push-3">
+                    <div className="col-sm-9 col-sm-push-3 bottom-padding">
                         <ReactCSSTransitionGroup
                             transitionName="appear"
                             transitionEnterTimeout={500}
