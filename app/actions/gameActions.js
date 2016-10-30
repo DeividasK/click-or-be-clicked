@@ -8,7 +8,7 @@ export function sendGameRequest(playerOneUid, playerTwoUid, playerTwoName) {
   let gameKey = firebase.database().ref('games').push().key;
   let players = { blue: playerOneUid, red: playerTwoUid };
   let actions = { blue: 30, red: 30 };
-  // let shapes = { blue: , red: }
+  let shapes = { blue: [ '.' ], red: [ '.' ] };
 
   firebase.database().ref('games/' + gameKey).set({
     players: players,
@@ -140,8 +140,6 @@ export function newShape(newShape) {
 export function reduceActions(gameKey, playerColor, actionsLeft) {
   let actions = {};
   actions[playerColor] = actionsLeft;
-
-  console.log(actions);
 
   store.dispatch({ type: 'REDUCE_ACTIONS', payload: actions });
 

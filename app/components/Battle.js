@@ -43,7 +43,6 @@ export default class Battle extends React.Component {
   componentWillReceiveProps (props) {
     let newState = Object.assign({}, this.state);
     newState.board = createNewBoard(props.board);
-    newState.timer = props.timer;
     this.setState(newState);
   }
 
