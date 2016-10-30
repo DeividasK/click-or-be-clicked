@@ -28,6 +28,10 @@ export default class BattleContainer extends React.Component {
   componentWillMount () {
     updateBoard(this.props.routeParams.id);
 
+    let actions = this.props.game.actions[this.props.game.my.color];
+
+    // let i = ( > )
+
     for (let i = 1; i <= 4; i += 1) {
       this.props.game.my.shapes.push(Shape.getRandomShape());
     }

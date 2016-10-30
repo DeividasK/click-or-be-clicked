@@ -8,6 +8,7 @@ export function sendGameRequest(playerOneUid, playerTwoUid, playerTwoName) {
   let gameKey = firebase.database().ref('games').push().key;
   let players = { blue: playerOneUid, red: playerTwoUid };
   let actions = { blue: 30, red: 30 };
+  // let shapes = { blue: , red: }
 
   firebase.database().ref('games/' + gameKey).set({
     players: players,
@@ -146,3 +147,14 @@ export function reduceActions(gameKey, playerColor, actionsLeft) {
 
   firebase.database().ref(`games/${gameKey}/actions`).update(actions);
 }
+
+// export function getActions(actionsLeft) {
+//   let actions = actionsLeft;
+//   let shapes = [];
+
+//   for (let i = 1; i <= 4; i += 1) {
+//     shapes.push(Shape.getRandomShape());
+//   }
+
+//   store.dispatch({ type: 'REDUCE_ACTIONS', payload: actions });
+// }

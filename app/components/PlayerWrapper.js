@@ -2,8 +2,8 @@ import React from 'react';
 
 export function PlayerWrapper(props) {
   return (
-    <div className="col-xs-6 col-md-3">
-      <div className={ "well text-center " + props.addClass } style={{ height: '100px' }}>
+    <div className={ `col-xs-${props.cols} col-md-${props.cols / 2}` }>
+      <div className={ "well text-center " + props.addClass }>
         <p>{ props.children }</p>
       </div>
     </div>

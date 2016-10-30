@@ -4,7 +4,7 @@ import { BattleBlock } from './BattleBlock';
 
 import { createNewBoard } from '../utils/gameHelpers';
 import { PlayerWrapper } from '../components/PlayerWrapper';
-import { Counter } from './Counter';
+import { Display } from './Display';
 import { reduceActions } from '../actions/gameActions';
 
 function reduceTimer(time) {
@@ -31,11 +31,11 @@ export default class Battle extends React.Component {
     this.timerObject = setInterval(() => {
       if (this.state.timer > 0) {
         this.setState({ ...this.state, timer: this.state.timer - 1 });
-      } else {
-        // clearInterval(this.timerObject);
-
+      } else if(this.props.count > 0) {
         reduceActions(this.props.gameId, this.props.userColor, this.props.count - 1);
         this.setState({ ...this.state, timer: 5 });
+      } else {
+        clearInterval(this.timerObject);
       }
     }, 1000);
   }
@@ -52,48 +52,23 @@ export default class Battle extends React.Component {
   }
 
   render () {
+    const mappedShapes = this.props.shapes.map((shape, index) => {
+      let separator = (index !== 0) ? ' ' : '';
+      return <span key={index}>{separator + shape}</span>;
+    });
+
     return (
       <div id="battleContainer">
 
-        <PlayerWrapper>
-            { this.props.blue !== undefined && this.props.blue.name }
-        </PlayerWrapper>
+        <PlayerWrapper cols={8}> { this.props.blue !== undefined && this.props.blue.name } </PlayerWrapper>
+        <PlayerWrapper cols={4} addClass="blue"> { this.state.board.blue } </PlayerWrapper>
 
+        <PlayerWrapper cols={8}> { this.props.red !== undefined && this.props.red.name } </PlayerWrapper>
+        <PlayerWrapper cols={4} addClass="red"> { this.state.board.red } </PlayerWrapper>
 
-        <PlayerWrapper addClass="blue">
-          { this.state.board.blue }
-        </PlayerWrapper>
-
-        <PlayerWrapper>
-          { this.props.red !== undefined && this.props.red.name }
-        </PlayerWrapper>
-
-        <PlayerWrapper addClass="red">
-          { this.state.board.red }
-        </PlayerWrapper>
-
-        <div className="col-xs-6 text-center">
-          Available shapes: { this.props.availableShapes }
-        </div>
-
-        <div className="col-xs-6 text-center">
-          Timer: { this.state.timer }
-        </div>
-
-        <div className="col-xs-6">
-          <p>
-            Shapes:<br />
-            <span className="shapes">
-              { this.props.shapes.map((shape, index) => {
-                let separator = (index !== 0) ? ' ' : '';
-                return <span key={index}>{separator + shape}</span>;
-              })}
-            </span>
-          </p>
-        </div>
-        <div className="col-xs-6">
-          <Counter count={ this.props.count }/>
-        </div>
+        <Display title="Shapes" display={ mappedShapes } />
+        <Display title="Timer" display={ this.state.timer } />
+        <Display title="Actions" display={ this.props.count } />
 
         <div className="col-xs-12">
           { this.state.board.list.map((row) => {
