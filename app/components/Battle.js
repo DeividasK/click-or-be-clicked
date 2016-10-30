@@ -5,15 +5,50 @@ import { BattleBlock } from './BattleBlock';
 import { createNewBoard } from '../utils/gameHelpers';
 import { PlayerWrapper } from '../components/PlayerWrapper';
 import { Counter } from './Counter';
+import { reduceActions } from '../actions/gameActions';
+
+function reduceTimer(time) {
+  store.dispatch({ type: 'REDUCE_TIMER', payload: time });
+}
+
+function setTimer(time) {
+  store.dispatch({ type: 'SET_TIMER', payload: time });
+}
+
+var timer;
 
 export default class Battle extends React.Component {
   constructor (props) {
     super();
-    this.state = createNewBoard(props.board);
+    this.state = {
+      timer: props.timer,
+      timerObject: null,
+      board: createNewBoard(props.board),
+    };
+  }
+
+  componentWillMount() {
+    this.timerObject = setInterval(() => {
+      if (this.state.timer > 0) {
+        this.setState({ ...this.state, timer: this.state.timer - 1 });
+      } else {
+        // clearInterval(this.timerObject);
+
+        reduceActions(this.props.gameId, this.props.userColor, this.props.count - 1);
+        this.setState({ ...this.state, timer: 5 });
+      }
+    }, 1000);
   }
 
   componentWillReceiveProps (props) {
-    this.setState(createNewBoard(props.board));
+    let newState = Object.assign({}, this.state);
+    newState.board = createNewBoard(props.board);
+    newState.timer = props.timer;
+    this.setState(newState);
+  }
+
+  componentWillUnmount() {
+    clearInterval(this.timerObject);
   }
 
   render () {
@@ -26,7 +61,7 @@ export default class Battle extends React.Component {
 
 
         <PlayerWrapper addClass="blue">
-          { this.state.blue }
+          { this.state.board.blue }
         </PlayerWrapper>
 
         <PlayerWrapper>
@@ -34,11 +69,15 @@ export default class Battle extends React.Component {
         </PlayerWrapper>
 
         <PlayerWrapper addClass="red">
-          { this.state.red }
+          { this.state.board.red }
         </PlayerWrapper>
 
-        <div className="col-xs-12 text-center">
+        <div className="col-xs-6 text-center">
           Available shapes: { this.props.availableShapes }
+        </div>
+
+        <div className="col-xs-6 text-center">
+          Timer: { this.state.timer }
         </div>
 
         <div className="col-xs-6">
@@ -57,7 +96,7 @@ export default class Battle extends React.Component {
         </div>
 
         <div className="col-xs-12">
-          { this.state.list.map((row) => {
+          { this.state.board.list.map((row) => {
             return (
               <BattleRow key={ row.key }>
                 { row.blocks.map((block) => {

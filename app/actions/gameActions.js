@@ -112,17 +112,10 @@ export function getGames(modalDangerCallback, modalSuccessCallback) {
   });
 }
 
-export function updateGame(gameKey, blocks, playerColor, actionsLeft) {
-  let actions = {};
-  actions[playerColor] = actionsLeft;
-
-  store.dispatch({ type: 'BLOCK_CLICK', payload: {
-    board: blocks,
-    actions: actions
-  }});
+export function updateGame(gameKey, blocks) {
+  store.dispatch({ type: 'BLOCK_CLICK', payload: blocks });
 
   firebase.database().ref(`games/${gameKey}/board`).update(blocks);
-  firebase.database().ref(`games/${gameKey}/actions`).update(actions);
 }
 
 export function resumeGame(gameKey) {
@@ -141,4 +134,15 @@ export function resumeGame(gameKey) {
 
 export function newShape(newShape) {
   store.dispatch({ type: 'NEW_SHAPE', payload: newShape });
+}
+
+export function reduceActions(gameKey, playerColor, actionsLeft) {
+  let actions = {};
+  actions[playerColor] = actionsLeft;
+
+  console.log(actions);
+
+  store.dispatch({ type: 'REDUCE_ACTIONS', payload: actions });
+
+  firebase.database().ref(`games/${gameKey}/actions`).update(actions);
 }

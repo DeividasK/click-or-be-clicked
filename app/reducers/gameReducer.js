@@ -5,10 +5,11 @@ export default function reducer(state = {
     gameInProgress: false,
     board: {},
     players: { blue: '', red: '' },
-    actions: { blue: 30, red: 30 },
+    actions: { blue: 18, red: 18 },
     my: {
       color: '',
       shapes: ['.'],
+      timer: 5,
     },
   }, action) {
 
@@ -66,8 +67,12 @@ export default function reducer(state = {
       return newState;
 
     case 'BLOCK_CLICK':
-      newState.board = Object.assign(newState.board, action.payload.board);
-      newState.actions = Object.assign(newState.actions, action.payload.actions);
+      newState.board = Object.assign(newState.board, action.payload);
+      return newState;
+
+    case 'REDUCE_ACTIONS':
+      newState.actions = Object.assign(newState.actions, action.payload);
+      newState.my.timer = 5;
       return newState;
 
     case 'NEW_SHAPE':
